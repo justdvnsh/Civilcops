@@ -67,3 +67,19 @@ class LoginView(APIView):
                 "data": "User not logged in",
                 "type": "failure"
             })
+
+class RegisterComplaintView(APIView):
+
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        pass
+
+class FeedbackView(APIView):                
+
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        pass
