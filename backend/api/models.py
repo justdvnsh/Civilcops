@@ -12,9 +12,9 @@ class User(Document):
 class Complaints(Document):    
     complaintIdentity = StringField(required=True)
     concernedDept = StringField()
-    imageUrl = URLField()
+    imageUrl = StringField()
     description = StringField()
-    attachment = URLField()
+    attachment = StringField()
     user = ReferenceField(User)
 
 class Feedback(Document):
