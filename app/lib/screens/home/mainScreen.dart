@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
               padding: EdgeInsets.symmetric(vertical: 10),
               height: 80,
               width: size.width,
-              color: Colors.white,
+              color: Colors.grey[50],
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
