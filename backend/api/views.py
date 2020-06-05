@@ -90,6 +90,7 @@ class RegisterComplaintView(APIView):
             imageUrl = request.data.get("image_url"),
             description = request.data.get("description"),
             attachment = request.data.get("attachment_url"),
+            status = request.data.get("status"),
             user = userQueryset[0]
             )
 
@@ -130,10 +131,6 @@ class MyComplaintsView(APIView):
                 "message": "No user with the provided email exists"
             })
 
-class FeedbackView(APIView):                
-
-    def get(self, request):
-        pass
-
+class FeedbackView(APIView):       
     def post(self, request):
         pass

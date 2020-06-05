@@ -87,8 +87,7 @@ class _ConfirmLocationScreenState extends State<ConfirmLocationScreen> {
                           textSize: 16,
                           textWeight: FontWeight.bold,
                           onPressed: () {
-                            Navigator.pushReplacement(context, 
-                            MaterialPageRoute(builder: (context) => MainScreen(latlng: model.initialLatLng, currentLocationString: model.currentLocationString)));
+                            Navigator.pushReplacementNamed(context, MainScreen.id);
                           },
                       ),
                     ),

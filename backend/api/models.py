@@ -15,6 +15,7 @@ class Complaints(Document):
     imageUrl = StringField()
     description = StringField()
     attachment = StringField()
+    status = StringField()
     user = ReferenceField(User)
 
 class Feedback(Document):
