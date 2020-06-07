@@ -1,3 +1,5 @@
+import 'package:civilcops/screens/home/registerComplaint/registerComplaintScreen.dart';
+import 'package:civilcops/screens/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
 class ReportScreen extends StatefulWidget {
@@ -77,7 +79,13 @@ class _ReportScreenState extends State<ReportScreen> {
                   ),
                 ),
               ),
-              
+              SizedBox(
+                height: 30,
+              ),
+              CustomButtons(
+                buttonText: "Proceed",
+                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterComplaintScreen())),
+              ),
             ],
           ),
         ),
