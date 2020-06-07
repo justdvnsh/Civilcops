@@ -25,7 +25,6 @@ class _ReportScreenState extends State<ReportScreen> {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  Icon(Icons.arrow_back_ios, size: 32),
                   SizedBox(width: 10,),
                   Text("Report Your Complaint", style: TextStyle(fontSize: 24),),
                 ],

@@ -1,5 +1,6 @@
 import 'package:civilcops/business_logic/viewmodels/home/confirm_location_viewmodel.dart';
 import 'package:civilcops/business_logic/viewmodels/home/main_screen_viewmodel.dart';
+import 'package:civilcops/business_logic/viewmodels/home/register_complaint_viewmodel.dart';
 import 'package:civilcops/business_logic/viewmodels/login_viewmodel.dart';
 import 'package:civilcops/business_logic/viewmodels/otpViewModel.dart';
 import 'package:civilcops/business_logic/viewmodels/signup_viewmodel.dart';
@@ -23,4 +24,5 @@ void setupServiceLocator() {
   serviceLocator.registerLazySingleton<OtpViewModel>(() => OtpViewModel());
   serviceLocator.registerLazySingleton<ConfirmLocationViewModel>(() => ConfirmLocationViewModel());
   serviceLocator.registerLazySingleton<MainScreenViewModel>(() => MainScreenViewModel());
+  serviceLocator.registerLazySingleton<RegisterComplaintViewModel>(() => RegisterComplaintViewModel());
 }
