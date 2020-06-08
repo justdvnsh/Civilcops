@@ -16,85 +16,7 @@ class RegisterComplaintScreen extends StatefulWidget {
 
 class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
 
-  RegisterComplaintViewModel model = serviceLocator<RegisterComplaintViewModel>();
-
-  List<Step> _steps = [
-    Step(
-      title: const Text('Take A Picture'),
-      isActive: false,
-      state: StepState.complete,
-      content: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "Tap on the Camera to click a picture.",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey[400]
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          IconButton(
-            icon: Icon(FontAwesomeIcons.camera, size: 44,),
-            onPressed: () {},
-          ),
-          SizedBox(
-            height: 40,
-          ),
-          CustomButtons(
-            buttonText: "Upload From Gallery",
-            onPressed: () {},
-            textSize: 14,
-          ),
-        ],
-      ),
-    ),
-    Step(
-      isActive: true,
-      state: StepState.editing,
-      title: const Text('Add  Description'),
-      content: Column(
-        children: <Widget>[
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "Add Description.",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[400]
-              ),
-            ),
-          ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Postcode'),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Icon(FontAwesomeIcons.paperclip, size: 20, color: Colors.teal[400],),
-              Text("Attach File", style: TextStyle(color: Colors.teal[400]),),
-            ],
-          ),
-        ],
-      ),
-    ),
-    Step(
-      state: StepState.editing,
-      title: const Text('Submit'),
-      subtitle: const Text("Error!"),
-      content: Column(
-        children: <Widget>[
-          CircleAvatar(
-            backgroundColor: Colors.red,
-          )
-        ],
-      ),
-    ),
-  ];
+  static RegisterComplaintViewModel model = serviceLocator<RegisterComplaintViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -126,11 +48,11 @@ class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
                         ),
                         SizedBox(height: 10),
                         Stepper(
-                          type: StepperType.vertical,
-                          steps: _steps,
+                          type: StepperType.horizontal,
+                          steps: model.steps,
                           currentStep: model.currentSteps,
-                          onStepContinue: model.next(_steps.length),
-                          onStepCancel: model.cancel(),
+                          onStepContinue: null,
+                          onStepCancel: null,
                           onStepTapped: (step) => model.goTo(step),
                         ),
                       ],
