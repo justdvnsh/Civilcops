@@ -1,5 +1,6 @@
 import 'package:civilcops/business_logic/viewmodels/home/register_complaint_viewmodel.dart';
 import 'package:civilcops/screens/widgets/buttons.dart';
+import 'package:civilcops/screens/widgets/scroll.dart';
 import 'package:civilcops/services/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,7 +21,7 @@ class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
   List<Step> _steps = [
     Step(
       title: const Text('Take A Picture'),
-      isActive: true,
+      isActive: false,
       state: StepState.complete,
       content: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -52,23 +53,38 @@ class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
       ),
     ),
     Step(
-      isActive: false,
+      isActive: true,
       state: StepState.editing,
-      title: const Text('Address'),
+      title: const Text('Add  Description'),
       content: Column(
         children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Home Address'),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Add Description.",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[400]
+              ),
+            ),
           ),
           TextFormField(
             decoration: InputDecoration(labelText: 'Postcode'),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Icon(FontAwesomeIcons.paperclip, size: 20, color: Colors.teal[400],),
+              Text("Attach File", style: TextStyle(color: Colors.teal[400]),),
+            ],
           ),
         ],
       ),
     ),
     Step(
-      state: StepState.error,
-      title: const Text('Avatar'),
+      state: StepState.editing,
+      title: const Text('Submit'),
       subtitle: const Text("Error!"),
       content: Column(
         children: <Widget>[
@@ -95,21 +111,29 @@ class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(18.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: ListView(
                   children: <Widget>[
-                    Row(
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        IconButton(icon: Icon(Icons.arrow_back_ios, size: 32), onPressed: () => Navigator.pop(context),),
-                        SizedBox(width: 10,),
-                        Text("Report Your Complaint", style: TextStyle(fontSize: 24),),
+                        Row(
+                          children: <Widget>[
+                            IconButton(icon: Icon(Icons.arrow_back_ios, size: 32), onPressed: () => Navigator.pop(context),),
+                            SizedBox(width: 10,),
+                            Text("Report Your Complaint", style: TextStyle(fontSize: 24),),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Stepper(
+                          type: StepperType.vertical,
+                          steps: _steps,
+                          currentStep: model.currentSteps,
+                          onStepContinue: model.next(_steps.length),
+                          onStepCancel: model.cancel(),
+                          onStepTapped: (step) => model.goTo(step),
+                        ),
                       ],
-                    ),
-                    SizedBox(height: 10),
-                    Stepper(
-                      type: StepperType.vertical,
-                      steps: _steps,
                     ),
                   ],
                 ),
