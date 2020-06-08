@@ -9,7 +9,7 @@ class RegisterComplaintViewModel extends ChangeNotifier {
 
   List<Step> _steps = [
     Step(
-      // title: const Text('Take A Picture'),
+      title: const Text('Take a Photo'),
       isActive: _complete == true ? true : false,
       state: _complete == true ? StepState.complete : StepState.editing,
       content: Column(
@@ -44,7 +44,7 @@ class RegisterComplaintViewModel extends ChangeNotifier {
     Step(
       isActive: _complete == true ? true : false,
       state: _complete == true ? StepState.complete : StepState.editing,
-      // title: const Text('Add  Description'),
+      title: const Text('Add  Description'),
       content: Column(
         children: <Widget>[
           Align(
@@ -86,8 +86,8 @@ class RegisterComplaintViewModel extends ChangeNotifier {
     Step(
       isActive: _complete == true ? true : false,
       state: _complete == true ? StepState.complete : StepState.editing,
-      // title: const Text('Submit'),
-      // subtitle: const Text("Error!"),
+      title: const Text('Submit'),
+      subtitle: const Text("Error!"),
       content: Column(
         children: <Widget>[
           CircleAvatar(
