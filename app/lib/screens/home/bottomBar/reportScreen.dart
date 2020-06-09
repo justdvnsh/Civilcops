@@ -1,3 +1,4 @@
+import 'package:civilcops/business_logic/models/complaints.dart';
 import 'package:civilcops/screens/home/registerComplaint/registerComplaintScreen.dart';
 import 'package:civilcops/screens/widgets/buttons.dart';
 import 'package:civilcops/screens/widgets/scroll.dart';
@@ -12,6 +13,8 @@ class ReportScreen extends StatefulWidget {
 }
 
 class _ReportScreenState extends State<ReportScreen> {
+
+  Complaint complaint = Complaint();
 
   @override
   Widget build(BuildContext context) {
