@@ -12,7 +12,7 @@ class _MyComplaintsScreenState extends State<MyComplaintsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("My Complaints"),),
+      backgroundColor: Colors.white,
     );
   }
 }

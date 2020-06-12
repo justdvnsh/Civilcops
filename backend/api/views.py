@@ -2,7 +2,6 @@ from rest_framework.views import APIView
 from rest_framework import views
 from rest_framework.response import Response 
 from rest_framework import status
-from mongo_auth.permissions import AuthenticatedOnly
 from .models import User, Complaints, Feedback
 from .serializers import UserSerializer
 from mongoengine import *
