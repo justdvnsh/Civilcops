@@ -12,10 +12,10 @@ class NavDrawer extends StatelessWidget {
   Function onPressUserProfileScreen;
   Function onPressFeedbackScreen;
   Function onPressLogout;
-  String userEmail;
+  String userName;
 
   NavDrawer({@required this.onPressMyComplaints, this.onPressNearbyComplaints, this.onPressReportScreen,
-  this.onPressNotificationsScreen, this.onPressUserProfileScreen, this.onPressFeedbackScreen, this.onPressLogout, this.userEmail});
+  this.onPressNotificationsScreen, this.onPressUserProfileScreen, this.onPressFeedbackScreen, this.onPressLogout, this.userName});
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +31,18 @@ class NavDrawer extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    CircleAvatar(),
-                    Text(this.userEmail),
+                    CircleAvatar(backgroundColor: Colors.black,),
+                    SizedBox(width: 10,),
+                    Text(this.userName),
                     Icon(Icons.arrow_right),
                   ],
                 ),
               )
             ),
             decoration: BoxDecoration(
-                color: Colors.green,
                 image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: AssetImage('images/civilcops.png'))),
+                    image: AssetImage('images/women.jpg'))),
           ),
           ListTile(
             leading: Icon(FontAwesomeIcons.file),

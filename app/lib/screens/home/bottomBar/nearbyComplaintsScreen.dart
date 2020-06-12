@@ -12,7 +12,7 @@ class _NearbyComplaintsScreenState extends State<NearbyComplaintsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Neaby Complaints"),),
+      backgroundColor: Colors.white,
     );
   }
 }

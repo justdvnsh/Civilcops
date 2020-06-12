@@ -61,7 +61,7 @@ class _MainScreenState extends State<MainScreen> {
                 model.setPage(4); 
                 Navigator.pop(context);
               },
-              userEmail: "Justdvnsh2208@gmail.com",
+              userName: "Divyansh Dwivedi",
             ),
             appBar: AppBar(
               elevation: 0,
