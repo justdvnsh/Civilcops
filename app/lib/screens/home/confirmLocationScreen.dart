@@ -1,3 +1,4 @@
+import 'package:civilcops/business_logic/models/user.dart';
 import 'package:civilcops/business_logic/viewmodels/home/confirm_location_viewmodel.dart';
 import 'package:civilcops/screens/home/mainScreen.dart';
 import 'package:civilcops/screens/shared/progressDialog.dart';
@@ -14,6 +15,9 @@ import 'package:provider/provider.dart';
 class ConfirmLocationScreen extends StatefulWidget {
 
   static String id = "ConfirmLocationScreen";
+  final User user;
+
+  ConfirmLocationScreen({@required this.user});
 
   @override
   _ConfirmLocationScreenState createState() => _ConfirmLocationScreenState();
@@ -87,7 +91,9 @@ class _ConfirmLocationScreenState extends State<ConfirmLocationScreen> {
                           textSize: 16,
                           textWeight: FontWeight.bold,
                           onPressed: () {
-                            Navigator.pushReplacementNamed(context, MainScreen.id);
+                            Navigator.pushReplacement(context, 
+                              MaterialPageRoute(builder: (context) => MainScreen(user: widget.user)),
+                            );
                           },
                       ),
                     ),

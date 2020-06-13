@@ -1,4 +1,5 @@
 
+import 'package:civilcops/business_logic/models/user.dart';
 import 'package:civilcops/screens/home/confirmLocationScreen.dart';
 import 'package:civilcops/screens/shared/progressDialog.dart';
 import 'package:civilcops/services/auth_service/otp_service.dart';
@@ -13,13 +14,15 @@ class OtpViewModel extends ChangeNotifier {
   final OtpService _otpService = serviceLocator<OtpService>();
   ProgressDialog pr;
 
-  void verifyOtp({context, String mobileNumber, String otpCode}) async {
+  void verifyOtp({context, User user, String otpCode}) async {
     pr = ProgressDialogWidget.getProgressBar(context: context);
     await pr.show();
-    final bool response = await _otpService.verifyOtp(mobileNumber: mobileNumber, otpCode: otpCode);
+    final bool response = await _otpService.verifyOtp(mobileNumber: user.getMobileNumber(), otpCode: otpCode);
     if (response) {
       pr.hide().whenComplete(() {
-        Navigator.pushReplacementNamed(context, ConfirmLocationScreen.id);        
+        Navigator.pushReplacement(context, MaterialPageRoute(
+          builder: (context) => ConfirmLocationScreen(user: user)
+        ));        
       });
     } else {
       pr.hide().whenComplete(() {

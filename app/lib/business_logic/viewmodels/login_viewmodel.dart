@@ -28,7 +28,7 @@ class LoginViewModel extends ChangeNotifier {
         Navigator.pushReplacement(
           context, 
           MaterialPageRoute(
-            builder: (context) => OTPVerificationScreen(mobileNumber: user.getMobileNumber()) 
+            builder: (context) => OTPVerificationScreen(user: user) 
             ),
         );
       });

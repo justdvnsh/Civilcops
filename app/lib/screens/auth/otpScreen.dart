@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:civilcops/business_logic/models/user.dart';
 import 'package:civilcops/business_logic/viewmodels/otpViewModel.dart';
 import 'package:civilcops/screens/widgets/buttons.dart';
 import 'package:civilcops/screens/widgets/scroll.dart';
@@ -13,9 +14,9 @@ import 'package:provider/provider.dart';
 class OTPVerificationScreen extends StatefulWidget {
 
   static String id = "OTPVerificationScreen";
-  final String mobileNumber;
+  final User user;
 
-  OTPVerificationScreen({this.mobileNumber});
+  OTPVerificationScreen({this.user});
 
   @override
   _OTPVerificationScreenState createState() => _OTPVerificationScreenState();
@@ -34,7 +35,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   @override
   void initState() {
     super.initState();
-    mobileNumber = widget.mobileNumber;
+    mobileNumber = widget.user.getMobileNumber();
     errorController = StreamController<ErrorAnimationType>();
   }
 
@@ -125,7 +126,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                         });
                         Fluttertoast.showToast(msg: "Please Fill in the correct OTP");
                       } else {
-                          model.verifyOtp(context: context, mobileNumber: mobileNumber, otpCode: currentText);
+                          model.verifyOtp(context: context, user: widget.user, otpCode: currentText);
                         }
                       },
                     ),

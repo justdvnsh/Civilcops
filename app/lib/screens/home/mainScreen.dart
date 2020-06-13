@@ -1,21 +1,16 @@
+import 'package:civilcops/business_logic/models/user.dart';
 import 'package:civilcops/business_logic/viewmodels/home/main_screen_viewmodel.dart';
-import 'package:civilcops/screens/home/bottomBar/myComplaintsScreen.dart';
-import 'package:civilcops/screens/home/bottomBar/nearbyComplaintsScreen.dart';
-import 'package:civilcops/screens/home/bottomBar/notificationsScreen.dart';
-import 'package:civilcops/screens/home/bottomBar/profileScreen.dart';
-import 'package:civilcops/screens/home/bottomBar/reportScreen.dart';
-import 'package:civilcops/screens/widgets/bottom_nav_bar.dart';
 import 'package:civilcops/screens/widgets/nav_drawer.dart';
 import 'package:civilcops/services/service_locator.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
 
   static String id = "MainScreen";
+  final User user;
+
+  MainScreen({@required this.user});
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -26,7 +21,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return ChangeNotifierProvider<MainScreenViewModel>.value(
       value: viewModel,
       child: Consumer<MainScreenViewModel>(
@@ -61,7 +55,7 @@ class _MainScreenState extends State<MainScreen> {
                 model.setPage(4); 
                 Navigator.pop(context);
               },
-              userName: "Divyansh Dwivedi",
+              userName: widget.user.getEmail(),
             ),
             appBar: AppBar(
               elevation: 0,
