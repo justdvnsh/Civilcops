@@ -22,7 +22,7 @@ class RegisterComplaintScreen extends StatefulWidget {
 class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
 
   RegisterComplaintViewModel model = serviceLocator<RegisterComplaintViewModel>();
-  static String desc;
+  static Complaint _complaint = Complaint();
 
   List<Step> _steps = [
     Step(
@@ -88,7 +88,7 @@ class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
               ),
               contentPadding: const EdgeInsets.all(40)
             ),
-            onChanged: (String val) => desc = val,
+            onChanged: (String val) => _complaint.description = val,
           ),
           SizedBox(height: 20,),
           Row(
@@ -119,19 +119,15 @@ class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
             ),
           ),
           SizedBox(height: 20,),
-          // Container(
-          //   decoration: InputDecoration(
-          //     hintText: "Description",
-          //     focusedBorder: OutlineInputBorder(
-          //       borderSide: const BorderSide(color: Colors.grey)
-          //     ),
-          //     disabledBorder: OutlineInputBorder(
-          //       borderSide: const BorderSide(color: Colors.grey)
-          //     ),
-          //     contentPadding: const EdgeInsets.all(40)
-          //   ),
-          //   child: Text(widget.complaint.getDescription()),
-          // ),
+          Container(
+            width: double.infinity,
+            height: 70,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black54),
+            ),
+            child: Text(_complaint.getDescription() == null ? "Nothing to show" : _complaint.getDescription()),
+          ),
           SizedBox(height: 20,),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -195,7 +191,7 @@ class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
                             widget.complaint.attachment = "google.com";
                             widget.complaint.imageUrl = "google.com";
                             widget.complaint.status = "unassigned";
-                            widget.complaint.description = "something";
+                            widget.complaint.description = _complaint.getDescription();
                             model.submit(context: context, complaint: widget.complaint, user: widget.user);
                           },
                           textSize: 14,
