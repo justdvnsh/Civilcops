@@ -121,7 +121,15 @@ class MyComplaintsView(APIView):
             if myComplaints:
                 return Response(data = {
                     "type": "Success",
-                    "MyComplaints": [complaints.description for complaints in myComplaints]
+                    "MyComplaints": [
+                        {
+                            "complaint_identity": complaints.complaintIdentity,
+                            "concerned_dept": complaints.concernedDept,
+                            "image_url": complaints.imageUrl,
+                            "attachment_url": complaints.attachment,
+                            "status": complaints.status,
+                            "description" : complaints.description
+                        } for complaints in myComplaints]
                 })
             else:
                 return Response(data = {

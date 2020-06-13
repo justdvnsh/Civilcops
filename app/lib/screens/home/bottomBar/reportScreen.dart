@@ -1,4 +1,5 @@
 import 'package:civilcops/business_logic/models/complaints.dart';
+import 'package:civilcops/business_logic/models/user.dart';
 import 'package:civilcops/business_logic/viewmodels/home/report_screen_viewmodel.dart';
 import 'package:civilcops/screens/home/registerComplaint/registerComplaintScreen.dart';
 import 'package:civilcops/screens/widgets/buttons.dart';
@@ -11,6 +12,9 @@ import 'package:provider/provider.dart';
 class ReportScreen extends StatefulWidget {
 
   static String id = "ReportScreen";
+  final User user;
+
+  ReportScreen({@required this.user});
 
   @override
   _ReportScreenState createState() => _ReportScreenState();
@@ -126,7 +130,8 @@ class _ReportScreenState extends State<ReportScreen> {
                           if ( model.complaintIdentity.isEmpty ) {
                             Fluttertoast.showToast(msg: "Choose a complaint identity");
                           } else {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterComplaintScreen()));
+                            complaint.complaintIdentity = model.complaintIdentity;
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterComplaintScreen(complaint: complaint, user: widget.user)));
                             Fluttertoast.showToast(msg: model.complaintIdentity);
                           }
                         },

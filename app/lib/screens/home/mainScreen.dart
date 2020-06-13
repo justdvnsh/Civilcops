@@ -18,7 +18,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   MainScreenViewModel viewModel = serviceLocator<MainScreenViewModel>();
-
+  
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<MainScreenViewModel>.value(
@@ -28,31 +28,31 @@ class _MainScreenState extends State<MainScreen> {
           return Scaffold(
             drawer: NavDrawer(
               onPressMyComplaints: () {
-                model.setPage(0); 
+                model.setPage(0, widget.user); 
                 Navigator.pop(context);
               },
               onPressLogout: () {
-                model.setPage(0); 
+                model.setPage(0, widget.user); 
                 Navigator.pop(context);
               },
               onPressNearbyComplaints: () {
-                model.setPage(1); 
+                model.setPage(1, widget.user); 
                 Navigator.pop(context);
               },
               onPressFeedbackScreen: () {
-                model.setPage(1); 
+                model.setPage(1, widget.user); 
                 Navigator.pop(context);
               },
               onPressReportScreen: () {
-                model.setPage(2); 
+                model.setPage(2, widget.user); 
                 Navigator.pop(context);
               },
               onPressNotificationsScreen: () {
-                model.setPage(3); 
+                model.setPage(3, widget.user); 
                 Navigator.pop(context);
               },
               onPressUserProfileScreen: () {
-                model.setPage(4); 
+                model.setPage(4, widget.user); 
                 Navigator.pop(context);
               },
               userName: widget.user.getEmail(),

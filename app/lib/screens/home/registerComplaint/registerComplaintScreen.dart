@@ -1,6 +1,7 @@
+import 'package:civilcops/business_logic/models/complaints.dart';
+import 'package:civilcops/business_logic/models/user.dart';
 import 'package:civilcops/business_logic/viewmodels/home/register_complaint_viewmodel.dart';
 import 'package:civilcops/screens/widgets/buttons.dart';
-import 'package:civilcops/screens/widgets/scroll.dart';
 import 'package:civilcops/services/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,6 +10,10 @@ import 'package:provider/provider.dart';
 class RegisterComplaintScreen extends StatefulWidget {
 
   static String id = "RegisterComplaintScreen";
+  final Complaint complaint;
+  final User user;
+
+  RegisterComplaintScreen({@required this.complaint, this.user});
 
   @override
   _RegisterComplaintScreenState createState() => _RegisterComplaintScreenState();
@@ -17,6 +22,7 @@ class RegisterComplaintScreen extends StatefulWidget {
 class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
 
   RegisterComplaintViewModel model = serviceLocator<RegisterComplaintViewModel>();
+  static String desc;
 
   List<Step> _steps = [
     Step(
@@ -53,7 +59,7 @@ class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
       ),
     ),
     Step(
-      isActive: true,
+      isActive: false,
       state: StepState.indexed,
       title: const Text('Add  Description'),
       content: Column(
@@ -82,6 +88,7 @@ class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
               ),
               contentPadding: const EdgeInsets.all(40)
             ),
+            onChanged: (String val) => desc = val,
           ),
           SizedBox(height: 20,),
           Row(
@@ -112,19 +119,19 @@ class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
             ),
           ),
           SizedBox(height: 20,),
-          TextFormField(
-            keyboardType: TextInputType.multiline,
-            decoration: InputDecoration(
-              hintText: "Description",
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.grey)
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.grey)
-              ),
-              contentPadding: const EdgeInsets.all(40)
-            ),
-          ),
+          // Container(
+          //   decoration: InputDecoration(
+          //     hintText: "Description",
+          //     focusedBorder: OutlineInputBorder(
+          //       borderSide: const BorderSide(color: Colors.grey)
+          //     ),
+          //     disabledBorder: OutlineInputBorder(
+          //       borderSide: const BorderSide(color: Colors.grey)
+          //     ),
+          //     contentPadding: const EdgeInsets.all(40)
+          //   ),
+          //   child: Text(widget.complaint.getDescription()),
+          // ),
           SizedBox(height: 20,),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -134,11 +141,6 @@ class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
             ],
           ),
           SizedBox(height: 20),
-          CustomButtons(
-            buttonText: "Submit",
-            onPressed: () {},
-            textSize: 14,
-          ),
         ],
       ),
     ),
@@ -185,6 +187,19 @@ class _RegisterComplaintScreenState extends State<RegisterComplaintScreen> {
                             return SizedBox();
                           },
                         ),
+                        model.currentSteps == 1 ? 
+                        CustomButtons(
+                          buttonText: "Submit",
+                          onPressed: () {
+                            widget.complaint.concernedDept = "technical";
+                            widget.complaint.attachment = "google.com";
+                            widget.complaint.imageUrl = "google.com";
+                            widget.complaint.status = "unassigned";
+                            widget.complaint.description = "something";
+                            model.submit(context: context, complaint: widget.complaint, user: widget.user);
+                          },
+                          textSize: 14,
+                        ) : SizedBox()
                       ],
                     ),
                   ],

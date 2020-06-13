@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ReportScreenViewModel extends ChangeNotifier {
-  int _radioValue = 0;
+  int _radioValue = null;
   String _complaintIdentity = "";
   static List<String> dropDownlist = <String>[
     "Municipal Coorporation",
