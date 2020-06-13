@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         primaryColorDark: Colors.teal[900],
         scaffoldBackgroundColor: Color(0xffc9e9f6)
       ),
-      initialRoute: ConfirmLocationScreen.id,
+      initialRoute: SplashScreen.id,
       routes: {
         SplashScreen.id: (context) => SplashScreen(),
         OnBoardingScreen.id: (context) => OnBoardingScreen(),

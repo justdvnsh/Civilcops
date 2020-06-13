@@ -11,9 +11,11 @@ class AuthServiceImpl implements AuthService {
 
   var client = http.Client();
   final String BASE_URL = "http://192.168.1.100:8000/civilcops/api/";
-  
+  final result = List();
+  final User user = User();
+
   @override
-  Future<bool> login({String mobileNumber}) async {
+  Future<List> login({String mobileNumber}) async {
     String url = BASE_URL + "login/";
     var data = {
       "mobile_number": mobileNumber
@@ -22,14 +24,27 @@ class AuthServiceImpl implements AuthService {
     if (response.statusCode == 200) {
       try {
         print(response.body);
-        return json.decode(response.body)["type"] == "success" ? true: false;
+        if (json.decode(response.body)["type"] == "success") {
+          user.email = json.decode(response.body)["user_email"];
+          user.firstName = json.decode(response.body)["user_firstName"];
+          user.lastName = json.decode(response.body)["user_lastName"];
+          user.mobileNumber = mobileNumber;
+          result.add(user);
+          result.add(true);
+          print(result.toString());
+          return result;
+        } else {} 
       } catch(e) {
         print(e);
-        return false;
+        result.add("null");
+        result.add(false);
+        return result;
       }
     } else {
       print(response.statusCode);
-      return false;
+      result.add("null");
+      result.add(false);
+      return result;
     }
   }
 

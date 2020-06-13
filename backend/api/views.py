@@ -63,10 +63,14 @@ class LoginView(APIView):
 
     def post(self, request):
         user = checkIfMobileNumberIsAlreadyRegistered(request.data.get("mobile_number"))
+        userqueryset = User.objects(mobileNumber = request.data.get("mobile_number"))
         if user:
             return Response(data={
                 "data": "User Is Logged in",
-                "type": "success"
+                "type": "success",
+                "user_email": [x.email for x in userqueryset][0],
+                "user_firstName": [x.firstName for x in userqueryset][0],
+                "user_lastName": [x.lastName for x in userqueryset][0]
             })
         else:
             return Response(data={

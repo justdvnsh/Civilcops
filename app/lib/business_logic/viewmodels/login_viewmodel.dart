@@ -17,18 +17,18 @@ class LoginViewModel extends ChangeNotifier {
   final OtpService _otpService = serviceLocator<OtpService>();
   ProgressDialog pr;
 
-  void login({context, User user}) async {
+  void login({context, String mobileNumber}) async {
     pr = ProgressDialogWidget.getProgressBar(context: context);
     await pr.show();
-    final bool response = await _authService.login(mobileNumber: user.getMobileNumber());
-    final bool otpSent = await getOtp(mobileNumber: user.getMobileNumber());
-    if (response && otpSent) {
+    final List response = await _authService.login(mobileNumber: mobileNumber);
+    final bool otpSent = await getOtp(mobileNumber: mobileNumber);
+    if (response != null && response.isNotEmpty && response[1] && otpSent) {
       pr.hide().whenComplete(() {
-        Fluttertoast.showToast(msg: "Otp Sent to your number");
+        Fluttertoast.showToast(msg: "Otp Sent to your number , Mr. " + response[0].getFirstName());
         Navigator.pushReplacement(
           context, 
           MaterialPageRoute(
-            builder: (context) => OTPVerificationScreen(user: user) 
+            builder: (context) => OTPVerificationScreen(user: response[0]) 
             ),
         );
       });

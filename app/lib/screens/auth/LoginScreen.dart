@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         if (this._formKey.currentState.validate()) {
                           this._formKey.currentState.save();
-                          model.login(context: context, user: userModel); 
+                          model.login(context: context, mobileNumber: userModel.getMobileNumber()); 
                         } else {
                           Fluttertoast.showToast(msg: "Mobile Number is not valid");
                         }
